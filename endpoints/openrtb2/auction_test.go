@@ -2969,6 +2969,9 @@ var testStoredRequests = []string{
 					"prebid": {
 						"storedrequest": {
 							"id": "1"
+						},
+						"options": {
+							"echovideoattrs": true
 						}
 					}
 				}
@@ -2993,6 +2996,9 @@ var testStoredRequests = []string{
 					"prebid": {
 						"storedrequest": {
 							"id": "1"
+						},
+						"options": {
+							"echovideoattrs": true
 						}
 					},
 					"appnexus": {
@@ -3022,6 +3028,9 @@ var testStoredRequests = []string{
 					"prebid": {
 						"storedrequest": {
 							"id": "1"
+						},
+						"options": {
+							"echovideoattrs": false
 						}
 					}
 				}
@@ -3088,18 +3097,8 @@ var testFinalRequests = []string{
 						"storedrequest":{
 							"id":"1"
 						},
-					"storedrequestattributes":{
-						"id":"adUnit1",
-						"ext":{
-							"appnexus":{
-								"placementId":"abc",
-								"position":"above",
-								"reserve":0.35
-							},
-							"rubicon":{
-								"accountId":"abc"
-							}
-						}
+					"options":{
+						"echovideoattrs":true
 					}
 				},
 				"rubicon":{
@@ -3133,18 +3132,8 @@ var testFinalRequests = []string{
 						"storedrequest":{
 							"id":"1"
 						},
-						"storedrequestattributes":{
-							"id":"adUnit1",
-							"ext":{
-								"appnexus":{
-									"placementId":"abc",
-									"position":"above",
-									"reserve":0.35
-								},
-								"rubicon":{
-									"accountId":"abc"
-								}
-							}
+						"options":{
+							"echovideoattrs":true
 						}
 					}
 				},
@@ -3185,19 +3174,9 @@ var testFinalRequests = []string{
   		        "storedrequest": {
   		          "id": "1"
   		        },
-  		        "storedrequestattributes": {
-  		          "id": "adUnit1",
-  		          "ext": {
-  		            "appnexus": {
-  		              "placementId": "abc",
-  		              "position": "above",
-  		              "reserve": 0.35
-  		            },
-  		            "rubicon": {
-  		              "accountId": "abc"
-  		            }
-  		          }
-  		        }
+  		        "options":{
+					"echovideoattrs":false
+				}
   		      },
   		      "rubicon": {
   		        "accountId": "abc"
@@ -3236,19 +3215,6 @@ var testFinalRequests = []string{
   		    "prebid": {
   		      "storedrequest": {
   		        "id": "1"
-  		      },
-  		      "storedrequestattributes": {
-  		        "id": "adUnit1",
-  		        "ext": {
-  		          "appnexus": {
-  		            "placementId": "abc",
-  		            "position": "above",
-  		            "reserve": 0.35
-  		          },
-  		          "rubicon": {
-  		            "accountId": "abc"
-  		          }
-  		        }
   		      }
   		    },
   		    "rubicon": {
@@ -3301,19 +3267,7 @@ var testStoredImps = []string{
 								}
 							}
 						}`,
-	`{
-  		          "id": "adUnit1",
-  		          "ext": {
-  		            "appnexus": {
-  		              "placementId": "abc",
-  		              "position": "above",
-  		              "reserve": 0.35
-  		            },
-  		            "rubicon": {
-  		              "accountId": "abc"
-  		            }
-  		          }
-  		        }`,
+	``,
 	``,
 }
 
