@@ -1399,10 +1399,8 @@ func (deps *endpointDeps) processStoredRequests(ctx context.Context, requestJson
 		imps[idIndices[i]] = resolvedImp
 
 		includeStoredImps, err := jsonparser.GetBoolean(resolvedImp, "ext", "prebid", "options", "echovideoattrs")
-		if err == jsonparser.KeyPathNotFoundError {
-			err = nil
-		}
-		if err != nil {
+
+		if err != nil && err != jsonparser.KeyPathNotFoundError {
 			return nil, nil, []error{err}
 		}
 		if includeStoredImps {
