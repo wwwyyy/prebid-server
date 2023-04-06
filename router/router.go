@@ -25,6 +25,7 @@ import (
 	"github.com/prebid/prebid-server/metrics"
 	metricsConf "github.com/prebid/prebid-server/metrics/config"
 	"github.com/prebid/prebid-server/modules"
+	"github.com/prebid/prebid-server/modules/moduledeps"
 	"github.com/prebid/prebid-server/openrtb_ext"
 	"github.com/prebid/prebid-server/pbs"
 	pbc "github.com/prebid/prebid-server/prebid_cache_client"
@@ -168,7 +169,8 @@ func New(cfg *config.Configuration, rateConvertor *currency.RateConverter) (r *R
 		syncerKeys = append(syncerKeys, k)
 	}
 
-	repo, moduleStageNames, err := modules.NewBuilder().Build(cfg.Hooks.Modules, generalHttpClient)
+	moduleDeps := moduledeps.ModuleDeps{HTTPClient: generalHttpClient}
+	repo, moduleStageNames, err := modules.NewBuilder().Build(cfg.Hooks.Modules, moduleDeps)
 	if err != nil {
 		glog.Fatalf("Failed to init hook modules: %v", err)
 	}
@@ -248,12 +250,12 @@ func New(cfg *config.Configuration, rateConvertor *currency.RateConverter) (r *R
 
 	// vtrack endpoint
 	if cfg.VTrack.Enabled {
-		vtrackEndpoint := events.NewVTrackEndpoint(cfg, accounts, cacheClient, cfg.BidderInfos)
+		vtrackEndpoint := events.NewVTrackEndpoint(cfg, accounts, cacheClient, cfg.BidderInfos, r.MetricsEngine)
 		r.POST("/vtrack", vtrackEndpoint)
 	}
 
 	// event endpoint
-	eventEndpoint := events.NewEventEndpoint(cfg, accounts, pbsAnalytics)
+	eventEndpoint := events.NewEventEndpoint(cfg, accounts, pbsAnalytics, r.MetricsEngine)
 	r.GET("/event", eventEndpoint)
 
 	userSyncDeps := &pbs.UserSyncDeps{

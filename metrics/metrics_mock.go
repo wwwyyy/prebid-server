@@ -163,6 +163,22 @@ func (me *MetricsEngineMock) RecordAdsCertSignTime(adsCertSignTime time.Duration
 	me.Called(adsCertSignTime)
 }
 
+func (me *MetricsEngineMock) RecordBidValidationCreativeSizeError(adapter openrtb_ext.BidderName, account string) {
+	me.Called(adapter, account)
+}
+
+func (me *MetricsEngineMock) RecordBidValidationCreativeSizeWarn(adapter openrtb_ext.BidderName, account string) {
+	me.Called(adapter, account)
+}
+
+func (me *MetricsEngineMock) RecordBidValidationSecureMarkupError(adapter openrtb_ext.BidderName, account string) {
+	me.Called(adapter, account)
+}
+
+func (me *MetricsEngineMock) RecordBidValidationSecureMarkupWarn(adapter openrtb_ext.BidderName, account string) {
+	me.Called(adapter, account)
+}
+
 func (me *MetricsEngineMock) RecordModuleCalled(labels ModuleLabels, duration time.Duration) {
 	me.Called(labels, duration)
 }
@@ -189,4 +205,20 @@ func (me *MetricsEngineMock) RecordModuleExecutionError(labels ModuleLabels) {
 
 func (me *MetricsEngineMock) RecordModuleTimeout(labels ModuleLabels) {
 	me.Called(labels)
+}
+
+func (me *MetricsEngineMock) RecordAccountGDPRPurposeWarning(account string, purposeName string) {
+	me.Called(account, purposeName)
+}
+
+func (me *MetricsEngineMock) RecordAccountGDPRChannelEnabledWarning(account string) {
+	me.Called(account)
+}
+
+func (me *MetricsEngineMock) RecordAccountCCPAChannelEnabledWarning(account string) {
+	me.Called(account)
+}
+
+func (me *MetricsEngineMock) RecordAccountUpgradeStatus(account string) {
+	me.Called(account)
 }
